@@ -7,10 +7,10 @@ import {
   OneToMany,
 } from "typeorm";
 
-import { Class } from "./Class";
+import Class from "../../../classes/typeorm/entity/Class";
 
-@Entity()
-export class Discipline {
+@Entity("disciplines")
+export default class Discipline {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 

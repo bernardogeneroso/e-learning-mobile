@@ -1,7 +1,7 @@
 import express from "express";
 
-import classesRoutes from "./classesRoutes";
-import disciplinesRoutes from "./disciplinesRoutes";
+import classesRoutes from "../../modules/classes/routes/classes.routes";
+import disciplinesRoutes from "../../modules/disciplines/routes/disciplines.routes";
 
 const routes = express.Router();
 

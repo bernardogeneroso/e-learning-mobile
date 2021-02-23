@@ -8,10 +8,10 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import { Discipline } from "./Discipline";
+import Discipline from "../../../disciplines/typeorm/entity/Discipline";
 
-@Entity()
-export class Class {
+@Entity("classes")
+export default class Class {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 

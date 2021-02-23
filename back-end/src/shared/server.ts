@@ -9,7 +9,7 @@ import { errors } from "celebrate";
 import AppError from "./errors/AppError";
 import Routers from "./routes";
 
-import "./database";
+import "./typeorm";
 
 const app = express();
 app.use(cors());
