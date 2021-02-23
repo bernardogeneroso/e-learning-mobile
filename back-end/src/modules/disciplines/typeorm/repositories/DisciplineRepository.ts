@@ -12,13 +12,29 @@ class DisciplineRepository implements IDisciplinesRepository {
   }
 
   public async findAll(): Promise<Discipline[] | undefined> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({
+      cache: true,
+    });
+  }
+
+  public async findOneSelectImage(id: string): Promise<Discipline | undefined> {
+    return this.ormRepository.findOne({
+      cache: true,
+      where: { id },
+      select: ["image"],
+    });
   }
 
   public async create(data: IDiscipline): Promise<Discipline> {
     const disciplineCreate = this.ormRepository.create(data);
 
     return this.ormRepository.save(disciplineCreate);
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete({ id });
+
+    return;
   }
 }
 

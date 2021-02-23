@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
+import { Expose } from "class-transformer";
 
 import Class from "../../../classes/typeorm/entity/Class";
 
@@ -14,7 +15,7 @@ export default class Discipline {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @Column()
+  @Column({ unique: true })
   name!: string;
 
   @Column()
@@ -29,4 +30,13 @@ export default class Discipline {
   @CreateDateColumn() created_at!: Date;
 
   @UpdateDateColumn() updated_at!: Date;
+
+  @Expose({ name: "image_url" })
+  getImage_url(): string | null {
+    if (!this.image) {
+      return null;
+    }
+
+    return `${process.env.APP_API_URL}/disciplines/image/${this.image}`;
+  }
 }

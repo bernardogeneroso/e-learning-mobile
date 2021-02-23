@@ -5,11 +5,19 @@ import ClassController from "../controllers/ClassController";
 
 const classesRoutes = express.Router();
 
-classesRoutes.get("/", (req, resp) => {
-  const classController = new ClassController();
+classesRoutes.get(
+  "/:discipline_id",
+  celebrate({
+    [Segments.PARAMS]: {
+      discipline_id: Joi.string().uuid().required(),
+    },
+  }),
+  (req, resp) => {
+    const classController = new ClassController();
 
-  classController.index(req, resp);
-});
+    classController.index(req, resp);
+  }
+);
 
 classesRoutes.post(
   "/create",
@@ -17,9 +25,7 @@ classesRoutes.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       description: Joi.string().required(),
-      class_name: Joi.string().required(),
-      minutes: Joi.string().required(),
-      completed: Joi.string().required(),
+      minutes: Joi.required(),
       discipline_id: Joi.string().uuid().required(),
     },
   }),
@@ -27,6 +33,34 @@ classesRoutes.post(
     const classController = new ClassController();
 
     classController.create(req, resp);
+  }
+);
+
+classesRoutes.delete(
+  "/:id",
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  (req, resp) => {
+    const classController = new ClassController();
+
+    classController.remove(req, resp);
+  }
+);
+
+classesRoutes.patch(
+  "/:id",
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  (req, resp) => {
+    const classController = new ClassController();
+
+    classController.completed(req, resp);
   }
 );
 

@@ -16,6 +16,7 @@ export class createDisciplines1614026628754 implements MigrationInterface {
           {
             name: "name",
             type: "varchar",
+            isUnique: true,
           },
           {
             name: "image",
