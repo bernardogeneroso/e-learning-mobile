@@ -1,11 +1,13 @@
 import React, {useState, useCallback} from 'react';
 import {Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   DisciplinesProps,
   useDisciplines,
 } from '../../../hooks/DisciplinesManager';
+import {ProfileScreenNavigationProp} from '../../../routes/app.routes';
 
 import {
   DisciplinesContent,
@@ -26,6 +28,7 @@ const Categorie = ({
   dimensionWindow,
   saved = false,
 }: CategorieProps) => {
+  const navigation = useNavigation<ProfileScreenNavigationProp>();
   const {modalAddDiscipline} = useDisciplines();
 
   const [animationContent] = useState(new Animated.Value(1));
@@ -69,6 +72,10 @@ const Categorie = ({
         widthWindows={dimensionWindow - 60}
         onPress={() => {
           startScaleAnimation(animationContent, 1.03, 500);
+          navigation.navigate('Class', {
+            screen: 'ClassContent',
+            params: {discipline},
+          });
         }}>
         <ImageDiscipline
           source={{uri: discipline.image_url}}

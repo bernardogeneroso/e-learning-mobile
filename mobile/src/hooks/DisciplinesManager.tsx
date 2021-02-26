@@ -24,6 +24,7 @@ interface DisciplinesManagerData {
   modalVisible: ModalVisibleProps;
   addFavorite(disciplineReceive: DisciplinesProps): void;
   removeFavorite(disciplineReceive: DisciplinesProps): void;
+  checkIfIsFavorite(id: string): boolean;
   toggleModal(): void;
   modalAddDiscipline(discipline: DisciplinesProps): void;
 }
@@ -103,6 +104,13 @@ const DisciplinesProvider: React.FC = ({children}) => {
     [disciplinesSaved],
   );
 
+  const checkIfIsFavorite = useCallback(
+    (id: string): boolean => {
+      return disciplinesSaved.some((discipline) => discipline.id === id);
+    },
+    [disciplinesSaved],
+  );
+
   const toggleModal = useCallback(() => {
     setModalVisible((state) => {
       return {
@@ -129,6 +137,7 @@ const DisciplinesProvider: React.FC = ({children}) => {
         modalVisible,
         addFavorite,
         removeFavorite,
+        checkIfIsFavorite,
         toggleModal,
         modalAddDiscipline,
       }}>

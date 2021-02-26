@@ -15,9 +15,12 @@ import Start from '../screens/Start';
 
 import Dashboard from '../screens/Dashboard';
 import Saves from '../screens/Saves';
+import Class from '../screens/ClassContent';
+import {DisciplinesProps} from '../hooks/DisciplinesManager';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const StackClass = createStackNavigator();
 
 type TabParamList = {
   Dashboard: undefined;
@@ -25,6 +28,12 @@ type TabParamList = {
 
 type StackParamList = {
   Start: undefined;
+  Class: {
+    screen: string;
+    params: {
+      discipline: DisciplinesProps;
+    };
+  };
 };
 
 export type ProfileScreenNavigationProp = CompositeNavigationProp<
@@ -89,6 +98,16 @@ function Home() {
   );
 }
 
+function DashboardClass() {
+  return (
+    <StackClass.Navigator
+      initialRouteName="ClassContent"
+      screenOptions={{headerShown: false}}>
+      <StackClass.Screen name="ClassContent" component={Class} />
+    </StackClass.Navigator>
+  );
+}
+
 const AppRoutes: React.FC = () => {
   return (
     <Stack.Navigator
@@ -98,6 +117,7 @@ const AppRoutes: React.FC = () => {
       }}>
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Class" component={DashboardClass} />
     </Stack.Navigator>
   );
 };

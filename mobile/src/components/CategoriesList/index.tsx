@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useWindowDimensions} from 'react-native';
 
 import {DisciplinesProps, useDisciplines} from '../../hooks/DisciplinesManager';
@@ -23,14 +23,24 @@ const DashBoard = ({disciplines, saved = false}: DashBoardProps) => {
   const {modalVisible} = useDisciplines();
   const {width: dimensionWindow} = useWindowDimensions();
 
+  const handleDisciplinesCourses = useMemo(() => {
+    if (!disciplines?.length) return;
+
+    const disciplineLength = disciplines.length;
+
+    return disciplineLength === 0
+      ? 'Sem cursos'
+      : disciplineLength === 1
+      ? `${disciplineLength} curso`
+      : `${disciplineLength} cursos`;
+  }, [disciplines?.length]);
+
   return (
     <Container>
       <ContainerMenu>
         <HeaderMenu>
           <TitleMenu>Categorias</TitleMenu>
-          <TextCountCourses>
-            {disciplines?.length ? disciplines?.length : 0} cursos
-          </TextCountCourses>
+          <TextCountCourses>{handleDisciplinesCourses}</TextCountCourses>
         </HeaderMenu>
 
         <DisciplinesList

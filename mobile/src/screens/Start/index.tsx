@@ -36,9 +36,7 @@ const Start = () => {
         <ButtonGoStudy
           onPress={() =>
             // @ts-ignore
-            navigation.navigate('Home', {
-              screen: 'Dashboard',
-            })
+            navigation.navigate('Home')
           }>
           <ButtonGoStudyText>Começar os estudos</ButtonGoStudyText>
         </ButtonGoStudy>

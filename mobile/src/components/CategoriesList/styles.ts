@@ -42,5 +42,5 @@ export const TextCountCourses = styled.Text`
 
 export const DisciplinesList = styled(
   // @ts-ignore
-  (FlatList as DisciplinesProps) as new () => FlatList<DisciplinesProps>,
+  FlatList as new () => FlatList<DisciplinesProps>,
 )``;
