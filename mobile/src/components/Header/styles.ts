@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import styled from 'styled-components/native';
+import {getStatusBarHeight} from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
   height: 210px;
@@ -40,5 +40,5 @@ export const Input = styled.TextInput`
   flex-grow: 1;
   margin-left: 18px;
   color: #6548a3;
-  font-family: "RobotoRegular";
+  font-family: 'Roboto-Regular';
 `;

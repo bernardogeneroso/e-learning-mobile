@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 import {
   Container,
@@ -9,12 +9,12 @@ import {
   ContainerSearch,
   ContainerInput,
   Input,
-} from "./styles";
+} from './styles';
 
-import logo from "../../../assets/logo.png";
+import logo from '../../../assets/logo.png';
 
 const Header = () => {
-  const [inputSearch, setInputSearch] = useState<string>("");
+  const [inputSearch, setInputSearch] = useState<string>('');
 
   return (
     <Container>
@@ -22,13 +22,13 @@ const Header = () => {
         <ImageLogo source={logo} width={120} />
 
         <TouchableOpacity>
-          <Feather name="power" size={22} color="#FF6680" />
+          <Icon name="power" size={22} color="#FF6680" />
         </TouchableOpacity>
       </ContainerHeader>
 
       <ContainerSearch>
         <ContainerInput>
-          <Feather name="search" size={22} color="#C4C4D1" />
+          <Icon name="search" size={22} color="#C4C4D1" />
 
           <Input
             keyboardAppearance="default"

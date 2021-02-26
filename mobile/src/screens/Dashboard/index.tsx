@@ -2,8 +2,8 @@ import React from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 
 import CategoriesList from "../../components/CategoriesList";
-
 import Header from "../../components/Header";
+import { useDisciplines } from "../../hooks/DisciplinesManager";
 
 import { Container } from "./styles";
 
@@ -14,6 +14,8 @@ export interface CategoriesProps {
 }
 
 const DashBoard = () => {
+  const { disciplines } = useDisciplines();
+
   return (
     <Container>
       <KeyboardAvoidingView
@@ -25,7 +27,7 @@ const DashBoard = () => {
       >
         <Header />
 
-        <CategoriesList />
+        <CategoriesList disciplines={disciplines} />
       </KeyboardAvoidingView>
     </Container>
   );

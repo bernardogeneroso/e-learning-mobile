@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Dimensions } from "react-native";
+import React from 'react';
+import {useWindowDimensions} from 'react-native';
+
+import {DisciplinesProps, useDisciplines} from '../../hooks/DisciplinesManager';
+import Categorie from './Categorie';
+import Modal from './Modal';
 
 import {
   Container,
@@ -7,100 +11,44 @@ import {
   HeaderMenu,
   TitleMenu,
   TextCountCourses,
-  CategoriesList,
-  CategorieContent,
-  TitleCategorie,
-  TextClasses,
-} from "./styles";
+  DisciplinesList,
+} from './styles';
 
-export interface CategoriesProps {
-  id: string;
-  name: string;
-  classes_number: string;
+interface DashBoardProps {
+  disciplines?: DisciplinesProps[];
+  saved?: boolean;
 }
 
-const categories = [
-  {
-    id: "rgjgekigjerkjgkreskgre",
-    name: "Matemática",
-    classes_number: 16,
-  },
-  {
-    id: "343434234gerrrge",
-    name: "Física",
-    classes_number: 25,
-  },
-  {
-    id: "egreegergegre",
-    name: "Inglês",
-    classes_number: 6,
-  },
-  {
-    id: "ghtrhrth57654",
-    name: "Química",
-    classes_number: 61,
-  },
-  {
-    id: "htrhtrhrthrthrth",
-    name: "História",
-    classes_number: 28,
-  },
-  {
-    id: "htrhtrh223rthrthrth",
-    name: "História",
-    classes_number: 28,
-  },
-  {
-    id: "32332342gtrgtr",
-    name: "História",
-    classes_number: 28,
-  },
-  {
-    id: "gtrgrrtgrtg",
-    name: "História",
-    classes_number: 28,
-  },
-  {
-    id: "htrhtrhrthtrhtrhrthrthhrthrth",
-    name: "História",
-    classes_number: 28,
-  },
-];
-
-interface Props {
-  data?: CategoriesProps[];
-}
-
-const DashBoard = ({ data }: Props) => {
-  const [dimensionWindow] = useState(Dimensions.get("window").width);
+const DashBoard = ({disciplines, saved = false}: DashBoardProps) => {
+  const {modalVisible} = useDisciplines();
+  const {width: dimensionWindow} = useWindowDimensions();
 
   return (
     <Container>
       <ContainerMenu>
         <HeaderMenu>
           <TitleMenu>Categorias</TitleMenu>
-          <TextCountCourses>43 cursos</TextCountCourses>
+          <TextCountCourses>
+            {disciplines?.length ? disciplines?.length : 0} cursos
+          </TextCountCourses>
         </HeaderMenu>
 
-        <CategoriesList
-          // @ts-ignore
-          data={categories}
+        <DisciplinesList
+          data={disciplines}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(categorie) => categorie.id}
-          renderItem={({ item: categorie }) => (
-            <CategorieContent
-              style={{
-                marginHorizontal: 5,
-              }}
-              widthWindows={dimensionWindow - 60}
-            >
-              <TitleCategorie>{categorie.name}</TitleCategorie>
-              <TextClasses>{categorie.classes_number} Aulas</TextClasses>
-            </CategorieContent>
+          keyExtractor={(discipline: DisciplinesProps) => discipline.id}
+          renderItem={({item: discipline}: {item: DisciplinesProps}) => (
+            <Categorie
+              discipline={discipline}
+              dimensionWindow={dimensionWindow}
+              saved={saved}
+            />
           )}
           numColumns={2}
         />
       </ContainerMenu>
+
+      <Modal modalVisible={modalVisible} />
     </Container>
   );
 };

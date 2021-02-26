@@ -1,15 +1,12 @@
-import styled from "styled-components/native";
-import { FlatList } from "react-native-gesture-handler";
+import styled from 'styled-components/native';
+import {FlatList} from 'react-native-gesture-handler';
 
-import { CategoriesProps } from "./index";
-
-interface CategorieContentProps {
-  widthWindows: number;
-}
+import {DisciplinesProps} from '../../hooks/DisciplinesManager';
 
 export const Container = styled.View`
   flex: 1;
   flex-direction: column;
+  width: 100%;
 
   background-color: #6548a3;
 `;
@@ -32,39 +29,18 @@ export const HeaderMenu = styled.View`
 `;
 
 export const TitleMenu = styled.Text`
-  font-family: "RubikRegular";
+  font-family: 'Rubik-Regular';
   font-size: 20px;
   color: #3d3d4c;
 `;
 
 export const TextCountCourses = styled.Text`
-  font-family: "RubikRegular";
+  font-family: 'Rubik-Regular';
   font-size: 15px;
   color: #a0a0b2;
 `;
 
-export const CategoriesList = styled(
-  FlatList as new () => FlatList<CategoriesProps>
+export const DisciplinesList = styled(
+  // @ts-ignore
+  (FlatList as DisciplinesProps) as new () => FlatList<DisciplinesProps>,
 )``;
-
-export const CategorieContent = styled.View<CategorieContentProps>`
-  padding: 18px;
-  background: #fff;
-  width: ${(props) => props.widthWindows / 2};
-  height: 100px;
-  margin-top: 10px;
-  justify-content: center;
-  border-radius: 20px;
-`;
-
-export const TitleCategorie = styled.Text`
-  font-family: "RubikRegular";
-  color: #6c6c80;
-  font-size: 15px;
-`;
-
-export const TextClasses = styled.Text`
-  font-family: "RubikRegular";
-  color: #c4c4d1;
-  font-size: 10px;
-`;

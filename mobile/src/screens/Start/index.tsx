@@ -1,7 +1,7 @@
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-import { ProfileScreenNavigationProp } from "../../routes/app.routes";
+import {ProfileScreenNavigationProp} from '../../routes/app.routes';
 
 import {
   Container,
@@ -13,10 +13,10 @@ import {
   Description,
   ButtonGoStudy,
   ButtonGoStudyText,
-} from "./styles";
+} from './styles';
 
-import eLearning from "../../../assets/start-page/e.learning.png";
-import ePhone from "../../../assets/start-page/phone.png";
+import eLearning from '../../../assets/start-page/e.learning.png';
+import ePhone from '../../../assets/start-page/phone.png';
 
 const Start = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -36,11 +36,10 @@ const Start = () => {
         <ButtonGoStudy
           onPress={() =>
             // @ts-ignore
-            navigation.navigate("Home", {
-              screen: "Dashboard",
+            navigation.navigate('Home', {
+              screen: 'Dashboard',
             })
-          }
-        >
+          }>
           <ButtonGoStudyText>Começar os estudos</ButtonGoStudyText>
         </ButtonGoStudy>
       </Content>

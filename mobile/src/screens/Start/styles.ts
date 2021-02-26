@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -30,7 +30,7 @@ export const Content = styled.View`
 
 export const Title = styled.Text`
   margin-bottom: 25px;
-  font-family: "RubikMedium";
+  font-family: 'Rubik-Medium';
   font-weight: 400;
   font-size: 36px;
   color: #ff6680;
@@ -41,7 +41,7 @@ export const Title = styled.Text`
 export const Description = styled.Text`
   margin-bottom: 45px;
   color: #edebf5;
-  font-family: "RobotoRegular";
+  font-family: 'Roboto-Regular';
   font-weight: 400;
   font-size: 15px;
   line-height: 25px;
@@ -59,5 +59,5 @@ export const ButtonGoStudy = styled.TouchableOpacity`
 export const ButtonGoStudyText = styled.Text`
   color: #ffffff;
   font-size: 15px;
-  font-family: "RobotoMedium";
+  font-family: 'Roboto-Medium';
 `;
