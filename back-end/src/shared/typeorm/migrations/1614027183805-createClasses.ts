@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from "typeorm";
 
-export class createClasses1614027183805 implements MigrationInterface {
+export class createLeassons1614027183805 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "classes",
+        name: "leassons",
         columns: [
           {
             name: "id",
@@ -27,7 +27,7 @@ export class createClasses1614027183805 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "class_name",
+            name: "leasson_name",
             type: "varchar",
           },
           {
@@ -39,7 +39,7 @@ export class createClasses1614027183805 implements MigrationInterface {
             type: "int",
           },
           {
-            name: "discipline_id",
+            name: "course_id",
             type: "uuid",
           },
           {
@@ -57,12 +57,12 @@ export class createClasses1614027183805 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "classes",
+      "leassons",
       new TableForeignKey({
-        name: "ClassesDesciplines",
-        columnNames: ["discipline_id"],
+        name: "LeassonsCourses",
+        columnNames: ["course_id"],
         referencedColumnNames: ["id"],
-        referencedTableName: "disciplines",
+        referencedTableName: "courses",
         onDelete: "SET NULL",
         onUpdate: "CASCADE",
       })
@@ -70,6 +70,6 @@ export class createClasses1614027183805 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("classes");
+    await queryRunner.dropTable("leassons");
   }
 }

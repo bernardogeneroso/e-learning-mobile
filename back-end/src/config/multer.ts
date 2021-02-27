@@ -7,7 +7,7 @@ const uploadsFolder = path.resolve(__dirname, "..", "..", "uploads");
 interface IUploadConfig {
   uploadsFolder: string;
 
-  multerStorageImageDisciplines: {
+  multerStorageImageCourses: {
     storage: StorageEngine;
   };
 }
@@ -15,9 +15,9 @@ interface IUploadConfig {
 export default {
   uploadsFolder,
 
-  multerStorageImageDisciplines: {
+  multerStorageImageCourses: {
     storage: multer.diskStorage({
-      destination: path.resolve(uploadsFolder, "disciplines"),
+      destination: path.resolve(uploadsFolder, "courses"),
       filename: (request, file, callback) => {
         const fileHash = crypto.randomBytes(10).toString("hex");
         const fileName = `${fileHash}-${file.originalname}`;

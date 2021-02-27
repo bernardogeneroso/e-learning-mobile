@@ -9,10 +9,10 @@ import {
 } from "typeorm";
 import { Expose, Exclude } from "class-transformer";
 
-import Discipline from "../../../disciplines/typeorm/entity/Discipline";
+import Course from "../../../courses/typeorm/entity/Course";
 
-@Entity("classes")
-export default class Class {
+@Entity("leassons")
+export default class Leasson {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
@@ -29,11 +29,11 @@ export default class Class {
   @Column({ default: 0 })
   completed: number = 0;
 
-  @Column() discipline_id!: string;
+  @Column() course_id!: string;
 
-  @ManyToOne(() => Discipline)
-  @JoinColumn({ name: "discipline_id" })
-  discipline!: Discipline;
+  @ManyToOne(() => Course)
+  @JoinColumn({ name: "course_id" })
+  course!: Course;
 
   @CreateDateColumn() created_at!: Date;
 

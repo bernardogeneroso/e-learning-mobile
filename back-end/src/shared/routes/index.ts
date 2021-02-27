@@ -1,11 +1,11 @@
 import express from "express";
 
-import classesRoutes from "../../modules/classes/routes/classes.routes";
-import disciplinesRoutes from "../../modules/disciplines/routes/disciplines.routes";
+import leassonsRoutes from "../../modules/leassons/routes/leassons.routes";
+import coursesRoutes from "../../modules/courses/routes/courses.routes";
 
 const routes = express.Router();
 
-routes.use("/classes", classesRoutes);
-routes.use("/disciplines", disciplinesRoutes);
+routes.use("/leassons", leassonsRoutes);
+routes.use("/courses", coursesRoutes);
 
 export default routes;

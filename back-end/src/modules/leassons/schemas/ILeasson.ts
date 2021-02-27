@@ -1,7 +1,7 @@
-export default interface IClass {
+export default interface ILeasson {
   name: string;
   description: string;
   minutes: number;
   completed: number;
-  discipline_id: string;
+  course_id: string;
 }

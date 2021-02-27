@@ -8,10 +8,10 @@ import {
 } from "typeorm";
 import { Expose } from "class-transformer";
 
-import Class from "../../../classes/typeorm/entity/Class";
+import Leasson from "../../../leassons/typeorm/entity/Leasson";
 
-@Entity("disciplines")
-export default class Discipline {
+@Entity("courses")
+export default class Course {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
@@ -22,10 +22,10 @@ export default class Discipline {
   image!: string;
 
   @Column()
-  classes!: number;
+  leassons!: number;
 
-  @OneToMany(() => Class, (classes) => classes.discipline_id)
-  classesLink!: Class;
+  @OneToMany(() => Leasson, (leassons) => leassons.course_id)
+  leassonsLink!: Leasson;
 
   @CreateDateColumn() created_at!: Date;
 
@@ -37,6 +37,6 @@ export default class Discipline {
       return null;
     }
 
-    return `${process.env.APP_API_URL}/disciplines/image/${this.image}`;
+    return `${process.env.APP_API_URL}/courses/image/${this.image}`;
   }
 }
