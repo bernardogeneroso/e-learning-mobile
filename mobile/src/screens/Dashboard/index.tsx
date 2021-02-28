@@ -1,11 +1,11 @@
-import React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import React from 'react';
+import {KeyboardAvoidingView, Platform} from 'react-native';
 
-import CategoriesList from "../../components/CategoriesList";
-import Header from "../../components/Header";
-import { useDisciplines } from "../../hooks/DisciplinesManager";
+import CategoriesList from '../../components/CategoriesList';
+import Header from '../../components/Header';
+import {useCourses} from '../../hooks/CoursesManager';
 
-import { Container } from "./styles";
+import {Container} from './styles';
 
 export interface CategoriesProps {
   id: string;
@@ -14,7 +14,7 @@ export interface CategoriesProps {
 }
 
 const DashBoard = () => {
-  const { disciplines } = useDisciplines();
+  const {courses} = useCourses();
 
   return (
     <Container>
@@ -22,12 +22,11 @@ const DashBoard = () => {
         style={{
           flex: 1,
         }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        enabled
-      >
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled>
         <Header />
 
-        <CategoriesList disciplines={disciplines} />
+        <CategoriesList courses={courses} />
       </KeyboardAvoidingView>
     </Container>
   );

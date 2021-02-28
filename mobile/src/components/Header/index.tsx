@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
-import {DisciplinesProps, useDisciplines} from '../../hooks/DisciplinesManager';
+import {CoursesProps, useCourses} from '../../hooks/CoursesManager';
 
 import {
   Container,
@@ -18,17 +18,17 @@ import {
 import logo from '../../../assets/logo.png';
 
 interface HeaderProps {
-  discipline?: DisciplinesProps;
-  classDashboard?: boolean;
+  course?: CoursesProps;
+  courseDashboard?: boolean;
 }
 
-const Header = ({discipline, classDashboard = false}: HeaderProps) => {
+const Header = ({course, courseDashboard = false}: HeaderProps) => {
   const navigation = useNavigation();
-  const {addFavorite, removeFavorite, checkIfIsFavorite} = useDisciplines();
+  const {addFavorite, removeFavorite, checkIfIsFavorite} = useCourses();
 
   const [inputSearch, setInputSearch] = useState<string>('');
   const [heartSelected, setHeartSelected] = useState<boolean>(() => {
-    return discipline ? checkIfIsFavorite(discipline?.id) : false;
+    return course ? checkIfIsFavorite(course?.id) : false;
   });
 
   const handleToggleHeartSelected = useCallback(() => {
@@ -38,7 +38,7 @@ const Header = ({discipline, classDashboard = false}: HeaderProps) => {
   return (
     <Container classDashboard>
       <ContainerHeader>
-        {classDashboard ? (
+        {courseDashboard ? (
           <>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <IconFeather name="arrow-left" size={22} color="#FF6680" />
@@ -50,7 +50,7 @@ const Header = ({discipline, classDashboard = false}: HeaderProps) => {
               <TouchableOpacity
                 onPress={() => {
                   handleToggleHeartSelected();
-                  discipline && removeFavorite(discipline);
+                  course && removeFavorite(course);
                 }}>
                 <IconAntDesign name="heart" size={22} color="#FF6680" />
               </TouchableOpacity>
@@ -58,7 +58,7 @@ const Header = ({discipline, classDashboard = false}: HeaderProps) => {
               <TouchableOpacity
                 onPress={() => {
                   handleToggleHeartSelected();
-                  discipline && addFavorite(discipline);
+                  course && addFavorite(course);
                 }}>
                 <IconFeather name="heart" size={22} color="#FF6680" />
               </TouchableOpacity>
@@ -75,7 +75,7 @@ const Header = ({discipline, classDashboard = false}: HeaderProps) => {
         )}
       </ContainerHeader>
 
-      {!classDashboard && (
+      {!courseDashboard && (
         <ContainerSearch>
           <ContainerInput>
             <IconFeather name="search" size={22} color="#C4C4D1" />

@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-interface DisciplinesContentProps {
+interface CoursesContentProps {
   widthWindows: number;
 }
 
-export const DisciplinesContent = styled.TouchableOpacity<DisciplinesContentProps>`
+export const CoursesContent = styled.TouchableOpacity<CoursesContentProps>`
   padding: 18px 24px 18px 24px;
   background: #fff;
   width: ${(props) => props.widthWindows / 2};

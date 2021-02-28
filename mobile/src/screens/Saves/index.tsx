@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import Header from "../../components/Header";
-import CategoriesList from "../../components/CategoriesList";
-import { useDisciplines } from "../../hooks/DisciplinesManager";
+import Header from '../../components/Header';
+import CategoriesList from '../../components/CategoriesList';
+import {useCourses} from '../../hooks/CoursesManager';
 
-import { Container } from "./styles";
+import {Container} from './styles';
 
 const Saves = () => {
-  const { disciplinesSaved } = useDisciplines();
+  const {coursesSaved} = useCourses();
 
   return (
     <Container>
       <Header />
 
-      <CategoriesList disciplines={disciplinesSaved} saved />
+      <CategoriesList courses={coursesSaved} saved />
     </Container>
   );
 };

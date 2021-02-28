@@ -1,11 +1,8 @@
 import React, {useCallback} from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {
-  DisciplinesProps,
-  useDisciplines,
-} from '../../../hooks/DisciplinesManager';
-import {ModalVisibleProps} from '../../../hooks/DisciplinesManager';
+import {CoursesProps, useCourses} from '../../../hooks/CoursesManager';
+import {ModalVisibleProps} from '../../../hooks/CoursesManager';
 
 import {
   Container,
@@ -24,10 +21,10 @@ interface modalVisibleProps {
 }
 
 const ModalRemoveOfFavourite = ({modalVisible}: modalVisibleProps) => {
-  const {toggleModal, removeFavorite} = useDisciplines();
+  const {toggleModal, removeFavorite} = useCourses();
 
   const handleRemoveFavorite = useCallback(
-    (discipline?: DisciplinesProps) => {
+    (discipline?: CoursesProps) => {
       if (discipline) {
         removeFavorite(discipline);
         toggleModal();

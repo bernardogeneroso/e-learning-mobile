@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {FlatList} from 'react-native-gesture-handler';
 
-import {DisciplinesProps} from '../../hooks/DisciplinesManager';
+import {CoursesProps} from '../../hooks/CoursesManager';
 
 export const Container = styled.View`
   flex: 1;
@@ -40,7 +40,7 @@ export const TextCountCourses = styled.Text`
   color: #a0a0b2;
 `;
 
-export const DisciplinesList = styled(
+export const CoursesList = styled(
   // @ts-ignore
-  FlatList as new () => FlatList<DisciplinesProps>,
+  FlatList as new () => FlatList<CoursesProps>,
 )``;

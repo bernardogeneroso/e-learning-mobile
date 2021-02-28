@@ -3,14 +3,11 @@ import {Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  DisciplinesProps,
-  useDisciplines,
-} from '../../../hooks/DisciplinesManager';
+import {CoursesProps, useCourses} from '../../../hooks/CoursesManager';
 import {ProfileScreenNavigationProp} from '../../../routes/app.routes';
 
 import {
-  DisciplinesContent,
+  CoursesContent,
   ImageDiscipline,
   TitleDiscipline,
   TextClasses,
@@ -18,18 +15,18 @@ import {
 } from './styles';
 
 export interface CategorieProps {
-  discipline: DisciplinesProps;
+  course: CoursesProps;
   dimensionWindow: number;
   saved?: boolean;
 }
 
 const Categorie = ({
-  discipline,
+  course,
   dimensionWindow,
   saved = false,
 }: CategorieProps) => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-  const {modalAddDiscipline} = useDisciplines();
+  const {modalAddCourse} = useCourses();
 
   const [animationContent] = useState(new Animated.Value(1));
   const [animationTrash] = useState(new Animated.Value(1));
@@ -67,24 +64,24 @@ const Categorie = ({
           },
         ],
       }}>
-      <DisciplinesContent
+      <CoursesContent
         style={{marginHorizontal: 5}}
         widthWindows={dimensionWindow - 60}
         onPress={() => {
           startScaleAnimation(animationContent, 1.03, 500);
-          navigation.navigate('Class', {
-            screen: 'ClassContent',
-            params: {discipline},
+          navigation.navigate('Leasson', {
+            screen: 'LeassonContent',
+            params: {course},
           });
         }}>
         <ImageDiscipline
-          source={{uri: discipline.image_url}}
+          source={{uri: course.image_url}}
           style={{
             resizeMode: 'contain',
           }}
         />
-        <TitleDiscipline>{discipline.name}</TitleDiscipline>
-        <TextClasses>{discipline.classes} Aulas</TextClasses>
+        <TitleDiscipline>{course.name}</TitleDiscipline>
+        <TextClasses>{course.leassons} Aulas</TextClasses>
         {saved && (
           <RemoveContent>
             <Animated.View
@@ -97,17 +94,17 @@ const Categorie = ({
                 color="#C4C4D1"
                 onPress={() => {
                   startScaleAnimation(animationTrash, 1.2, 500);
-                  modalAddDiscipline(discipline);
+                  modalAddCourse(course);
                 }}
                 onLongPress={() => {
                   startScaleAnimation(animationTrash, 1.2, 500);
-                  modalAddDiscipline(discipline);
+                  modalAddCourse(course);
                 }}
               />
             </Animated.View>
           </RemoveContent>
         )}
-      </DisciplinesContent>
+      </CoursesContent>
     </Animated.View>
   );
 };

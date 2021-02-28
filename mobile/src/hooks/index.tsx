@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { DisciplinesProvider } from "./DisciplinesManager";
+import {CoursesProvider} from './CoursesManager';
 
-const AppProvider: React.FC = ({ children }) => (
-  <DisciplinesProvider>{children}</DisciplinesProvider>
+const AppProvider: React.FC = ({children}) => (
+  <CoursesProvider>{children}</CoursesProvider>
 );
 
 export default AppProvider;

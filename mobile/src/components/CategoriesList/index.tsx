@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {useWindowDimensions} from 'react-native';
 
-import {DisciplinesProps, useDisciplines} from '../../hooks/DisciplinesManager';
+import {CoursesProps, useCourses} from '../../hooks/CoursesManager';
 import Categorie from './Categorie';
 import Modal from './Modal';
 
@@ -11,45 +11,45 @@ import {
   HeaderMenu,
   TitleMenu,
   TextCountCourses,
-  DisciplinesList,
+  CoursesList,
 } from './styles';
 
 interface DashBoardProps {
-  disciplines?: DisciplinesProps[];
+  courses?: CoursesProps[];
   saved?: boolean;
 }
 
-const DashBoard = ({disciplines, saved = false}: DashBoardProps) => {
-  const {modalVisible} = useDisciplines();
+const DashBoard = ({courses, saved = false}: DashBoardProps) => {
+  const {modalVisible} = useCourses();
   const {width: dimensionWindow} = useWindowDimensions();
 
-  const handleDisciplinesCourses = useMemo(() => {
-    if (!disciplines?.length) return;
+  const handleCoursesCourses = useMemo(() => {
+    if (!courses?.length) return;
 
-    const disciplineLength = disciplines.length;
+    const courseLength = courses.length;
 
-    return disciplineLength === 0
+    return courseLength === 0
       ? 'Sem cursos'
-      : disciplineLength === 1
-      ? `${disciplineLength} curso`
-      : `${disciplineLength} cursos`;
-  }, [disciplines?.length]);
+      : courseLength === 1
+      ? `${courseLength} curso`
+      : `${courseLength} cursos`;
+  }, [courses?.length]);
 
   return (
     <Container>
       <ContainerMenu>
         <HeaderMenu>
           <TitleMenu>Categorias</TitleMenu>
-          <TextCountCourses>{handleDisciplinesCourses}</TextCountCourses>
+          <TextCountCourses>{handleCoursesCourses}</TextCountCourses>
         </HeaderMenu>
 
-        <DisciplinesList
-          data={disciplines}
+        <CoursesList
+          data={courses}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(discipline: DisciplinesProps) => discipline.id}
-          renderItem={({item: discipline}: {item: DisciplinesProps}) => (
+          keyExtractor={(course: CoursesProps) => course.id}
+          renderItem={({item: course}: {item: CoursesProps}) => (
             <Categorie
-              discipline={discipline}
+              course={course}
               dimensionWindow={dimensionWindow}
               saved={saved}
             />

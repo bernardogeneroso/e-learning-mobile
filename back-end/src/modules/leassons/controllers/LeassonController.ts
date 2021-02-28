@@ -20,7 +20,16 @@ class LeassonController {
 
       if (!leassons) throw new AppError("Error on get leassons", 400);
 
-      return response.json(classToClass(leassons));
+      const leassonsChanged = leassons.map((leasson, i) => {
+        const count = i + 1;
+
+        return {
+          ...leasson,
+          leasson_number: count < 10 ? "0" + count : count.toString(),
+        };
+      });
+
+      return response.json(classToClass(leassonsChanged));
     } catch {
       throw new AppError("Error on get leassons", 400);
     }

@@ -15,12 +15,12 @@ import Start from '../screens/Start';
 
 import Dashboard from '../screens/Dashboard';
 import Saves from '../screens/Saves';
-import Class from '../screens/ClassContent';
-import {DisciplinesProps} from '../hooks/DisciplinesManager';
+import Leasson from '../screens/LeassonContent';
+import {CoursesProps} from '../hooks/CoursesManager';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-const StackClass = createStackNavigator();
+const StackLeasson = createStackNavigator();
 
 type TabParamList = {
   Dashboard: undefined;
@@ -28,10 +28,10 @@ type TabParamList = {
 
 type StackParamList = {
   Start: undefined;
-  Class: {
+  Leasson: {
     screen: string;
     params: {
-      discipline: DisciplinesProps;
+      course: CoursesProps;
     };
   };
 };
@@ -98,13 +98,13 @@ function Home() {
   );
 }
 
-function DashboardClass() {
+function DashboardLeasson() {
   return (
-    <StackClass.Navigator
-      initialRouteName="ClassContent"
+    <StackLeasson.Navigator
+      initialRouteName="LeassonContent"
       screenOptions={{headerShown: false}}>
-      <StackClass.Screen name="ClassContent" component={Class} />
-    </StackClass.Navigator>
+      <StackLeasson.Screen name="LeassonContent" component={Leasson} />
+    </StackLeasson.Navigator>
   );
 }
 
@@ -117,7 +117,7 @@ const AppRoutes: React.FC = () => {
       }}>
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Class" component={DashboardClass} />
+      <Stack.Screen name="Leasson" component={DashboardLeasson} />
     </Stack.Navigator>
   );
 };
