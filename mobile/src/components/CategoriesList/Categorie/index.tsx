@@ -69,8 +69,8 @@ const Categorie = ({
         widthWindows={dimensionWindow - 60}
         onPress={() => {
           startScaleAnimation(animationContent, 1.03, 500);
-          navigation.navigate('Leasson', {
-            screen: 'LeassonContent',
+          navigation.navigate('Lessons', {
+            screen: 'Lessons',
             params: {course},
           });
         }}>

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   background-color: #fff;
   border-radius: 16px;
   padding: 22px 20px 22px 65px;
@@ -8,14 +8,14 @@ export const Container = styled.View`
   position: relative;
 `;
 
-export const TitleLeasson = styled.Text`
+export const TitleLesson = styled.Text`
   font-family: 'Rubik-Regular';
   font-size: 15px;
   color: #6c6c80;
   height: 35px;
 `;
 
-export const InfoLeasson = styled.View`
+export const InfoLesson = styled.View`
   margin-top: 10px;
   flex-direction: row;
   justify-content: space-between;
@@ -26,7 +26,7 @@ export const GeralInfo = styled.View`
   align-items: center;
 `;
 
-export const NumberOfLeassonText = styled.Text`
+export const NumberOfLessonText = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 12px;
   color: #c4c4d1;
@@ -48,13 +48,13 @@ export const TimeText = styled.Text`
   color: #c4c4d1;
 `;
 
-export const LeassonCompleted = styled.View`
+export const LessonCompleted = styled.View`
   background: #61c5bd;
   border-radius: 12px;
   padding: 4px 8px 4px 8px;
 `;
 
-export const LeassonCompletedText = styled.Text`
+export const LessonCompletedText = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 11px;
   color: #fff;

@@ -1,22 +1,24 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Animated, Dimensions, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {LeassonsProps} from '..';
+import {LessonsProps} from '..';
 
 import {
   Container,
-  TitleLeasson,
-  InfoLeasson,
+  TitleLesson,
+  InfoLesson,
   GeralInfo,
-  NumberOfLeassonText,
+  NumberOfLessonText,
   TimeLeassonView,
   TimeIcon,
   TimeText,
-  LeassonCompleted,
-  LeassonCompletedText,
+  LessonCompleted,
+  LessonCompletedText,
   ContainerVideoIcon,
 } from './styles';
+import {useLessons} from '../../../hooks/LessonsManager';
 
 const DEFAULT_CARD_HEIGHT = 112;
 export const MARGIN = 6;
@@ -32,10 +34,13 @@ const styles = StyleSheet.create({
 interface LeassonItemProps {
   y: Animated.Value;
   index: number;
-  leasson: LeassonsProps;
+  lesson: LessonsProps;
 }
 
-const LeassonItem = ({y, index, leasson}: LeassonItemProps) => {
+const LessonItem = ({y, index, lesson}: LeassonItemProps) => {
+  const navigation = useNavigation();
+  const {course} = useLessons();
+
   const position = Animated.subtract(index * CARD_HEIGHT, y);
   const isDisappearing = -CARD_HEIGHT;
   const isTop = 0;
@@ -66,28 +71,37 @@ const LeassonItem = ({y, index, leasson}: LeassonItemProps) => {
     outputRange: [0.5, 1, 1, 0.5],
   });
 
+  const handleNavigateToLeasson = useCallback(
+    (lesson: LessonsProps) => {
+      navigation.navigate('Lesson', {lesson, course});
+    },
+    [navigation, course],
+  );
+
   return (
     <Animated.View
       key={index}
       style={[styles.card, {opacity, transform: [{translateY}, {scale}]}]}>
-      <Container>
-        <TitleLeasson>{leasson.name}</TitleLeasson>
+      <Container onPress={() => handleNavigateToLeasson(lesson)}>
+        <TitleLesson>{lesson.name}</TitleLesson>
 
-        <InfoLeasson>
+        <InfoLesson>
           <GeralInfo>
-            <NumberOfLeassonText>Aula</NumberOfLeassonText>
+            <NumberOfLessonText>
+              Aula {lesson.leasson_number}
+            </NumberOfLessonText>
             <TimeLeassonView>
               <TimeIcon>
                 <Icon name="clock" size={12} color="#C4C4D1" />
               </TimeIcon>
-              <TimeText>5 min</TimeText>
+              <TimeText>{lesson.minutes} min</TimeText>
             </TimeLeassonView>
           </GeralInfo>
 
-          <LeassonCompleted>
-            <LeassonCompletedText>Completo!</LeassonCompletedText>
-          </LeassonCompleted>
-        </InfoLeasson>
+          <LessonCompleted>
+            <LessonCompletedText>Completo!</LessonCompletedText>
+          </LessonCompleted>
+        </InfoLesson>
 
         <ContainerVideoIcon>
           <Icon name="play-circle" size={42} color="#fff" />
@@ -97,4 +111,4 @@ const LeassonItem = ({y, index, leasson}: LeassonItemProps) => {
   );
 };
 
-export default LeassonItem;
+export default LessonItem;

@@ -1,21 +1,21 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Animated} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 import Header from '../../components/Header';
 import {CoursesProps} from '../../hooks/CoursesManager';
-import api from '../../services/api';
-import LeassonItem from './LeassonItem';
+import {useLessons} from '../../hooks/LessonsManager';
+import LessonItem from './LessonItem';
 
 import {
   Container,
-  ContainerLeasson,
-  HeaderLeasson,
-  LeassonTitle,
-  LeassonText,
+  ContainerLessons,
+  HeaderLessons,
+  LessonTitle,
+  LessonText,
 } from './styles';
 
-interface LeassonContentParams {
+interface LessonsParams {
   route: {
     params: {
       course: CoursesProps;
@@ -23,12 +23,13 @@ interface LeassonContentParams {
   };
 }
 
-export interface LeassonsProps {
+export interface LessonsProps {
   id: string;
   name: string;
   description: string;
   minutes: number;
   completed: number;
+  leasson_number: string;
   courses_id: string;
   created_at: string;
   updated_at: string;
@@ -36,23 +37,21 @@ export interface LeassonsProps {
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-const LeassonContent = ({
+const Lessons = ({
   route: {
     params: {course},
   },
-}: LeassonContentParams) => {
+}: LessonsParams) => {
+  const {lessons, selectCourse} = useLessons();
+
   const y = new Animated.Value(0);
   const onScroll = Animated.event([{nativeEvent: {contentOffset: {y}}}], {
     useNativeDriver: true,
   });
 
-  const [leassons, setCourses] = useState<CoursesProps[]>([]);
-
   useEffect(() => {
-    api.get(`/leassons/${course.id}`).then(({data}) => {
-      setCourses(data);
-    });
-  }, [course.id]);
+    selectCourse(course);
+  }, [selectCourse, course]);
 
   const handleDisciplineCoursees = useMemo(() => {
     return course.leassons === 0
@@ -66,30 +65,30 @@ const LeassonContent = ({
     <Container>
       <Header course={course} courseDashboard />
 
-      <ContainerLeasson>
-        <HeaderLeasson>
-          <LeassonTitle>{course.name}</LeassonTitle>
+      <ContainerLessons>
+        <HeaderLessons>
+          <LessonTitle>{course.name}</LessonTitle>
 
-          <LeassonText>{handleDisciplineCoursees}</LeassonText>
-        </HeaderLeasson>
+          <LessonText>{handleDisciplineCoursees}</LessonText>
+        </HeaderLessons>
 
         <AnimatedFlatList
-          data={leassons}
+          data={lessons}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={16}
           bounces={false}
-          keyExtractor={(classItem: LeassonsProps) => classItem.id}
-          renderItem={({index, item: leasson}) => (
-            <LeassonItem {...{index, y, leasson}} />
+          keyExtractor={(classItem: LessonsProps) => classItem.id}
+          renderItem={({index, item: lesson}) => (
+            <LessonItem {...{index, y, lesson, course}} />
           )}
           style={{
             marginTop: 4,
           }}
           {...{onScroll}}
         />
-      </ContainerLeasson>
+      </ContainerLessons>
     </Container>
   );
 };
 
-export default LeassonContent;
+export default Lessons;

@@ -143,7 +143,7 @@ function useCourses(): CoursesManagerData {
   const context = useContext(CoursesManager);
 
   if (!context) {
-    throw new Error('useAuth must be used within an CoursesProvider');
+    throw new Error('useCourses must be used within an CoursesProvider');
   }
 
   return context;

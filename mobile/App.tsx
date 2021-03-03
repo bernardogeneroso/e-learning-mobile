@@ -11,7 +11,12 @@ export default function App() {
   return (
     <AppProvider>
       <NavigationContainer>
-        <StatusBar barStyle="light-content" translucent />
+        <StatusBar
+          barStyle="light-content"
+          networkActivityIndicatorVisible
+          animated
+          translucent
+        />
 
         <Routes />
       </NavigationContainer>
