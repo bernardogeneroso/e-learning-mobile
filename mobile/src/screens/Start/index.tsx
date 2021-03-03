@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {ProfileScreenNavigationProp} from '../../routes/app.routes';
 
@@ -21,6 +22,23 @@ import ePhone from '../../../assets/start-page/phone.png';
 const Start = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
+  const [firstTime, setFirstTime] = useState<boolean>(false);
+
+  useEffect(() => {
+    AsyncStorage.getItem('e-learning:first-time').then((result) => {
+      if (result) {
+        setFirstTime(true);
+      }
+    });
+  }, []);
+
+  const handleNavigateToHome = useCallback(async () => {
+    await AsyncStorage.setItem('e-learning:first-time', JSON.stringify(true));
+
+    // @ts-ignore
+    navigation.navigate('Home');
+  }, [navigation]);
+
   return (
     <Container>
       <ContentImage>
@@ -33,12 +51,10 @@ const Start = () => {
         <Description>
           Entre na plataforma e acesse cursos de diversas áreas de conhecimento.
         </Description>
-        <ButtonGoStudy
-          onPress={() =>
-            // @ts-ignore
-            navigation.navigate('Home')
-          }>
-          <ButtonGoStudyText>Começar os estudos</ButtonGoStudyText>
+        <ButtonGoStudy onPress={handleNavigateToHome}>
+          <ButtonGoStudyText>
+            {firstTime ? 'Continuar os estudos' : 'Começar os estudos'}
+          </ButtonGoStudyText>
         </ButtonGoStudy>
       </Content>
     </Container>

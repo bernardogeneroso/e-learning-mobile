@@ -22,6 +22,7 @@ interface CoursesManagerData {
   courses: CoursesProps[];
   coursesSaved: CoursesProps[];
   modalVisible: ModalVisibleProps;
+  loading: boolean;
   addFavorite(courseReceive: CoursesProps): void;
   removeFavorite(courseReceive: CoursesProps): void;
   checkIfIsFavorite(id: string): boolean;
@@ -57,6 +58,7 @@ const CoursesProvider: React.FC = ({children}) => {
 
     loadStoragedData();
 
+    setLoading(true);
     api.get('/courses').then(({data}) => {
       setCourses(data);
       setLoading(false);
@@ -128,6 +130,7 @@ const CoursesProvider: React.FC = ({children}) => {
         courses,
         coursesSaved,
         modalVisible,
+        loading,
         addFavorite,
         removeFavorite,
         checkIfIsFavorite,

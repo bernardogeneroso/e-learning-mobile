@@ -8,7 +8,7 @@ export interface LessonsProps {
   name: string;
   description: string;
   minutes: number;
-  completed: number;
+  completed: boolean;
   leasson_number: string;
   courses_id: string;
   created_at: string;
@@ -18,6 +18,8 @@ export interface LessonsProps {
 interface LessonsManagerData {
   lessons: LessonsProps[];
   course: CoursesProps;
+  loading: boolean;
+  lessonCompleted(id: string): void;
   actualIndex(id: string): number;
   nextLesson(id: string): LessonsProps | undefined;
   previouLesson(id: string): LessonsProps | undefined;
@@ -31,17 +33,39 @@ const LessonsManager = createContext<LessonsManagerData>(
 const LessonsProvider = ({children}: any) => {
   const [lessons, setLessons] = useState<LessonsProps[]>([]);
   const [course, setCourse] = useState<CoursesProps>({} as CoursesProps);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (course) {
+      setLoading(true);
       api.get(`/leassons/${course.id}`).then(({data}) => {
         setLessons(data);
+        setLoading(false);
       });
     }
   }, [course]);
 
   const selectCourse = (course: CoursesProps) => {
     setCourse(course);
+  };
+
+  const lessonCompleted = async (id: string) => {
+    await api.put(`/leassons/${id}`);
+
+    setLessons((state) => {
+      const updateState = state.map((lessonNow) => {
+        if (id === lessonNow.id) {
+          return {
+            ...lessonNow,
+            completed: true,
+          };
+        }
+
+        return lessonNow;
+      });
+
+      return updateState;
+    });
   };
 
   const actualIndex = (id: string): number => {
@@ -81,6 +105,8 @@ const LessonsProvider = ({children}: any) => {
       value={{
         lessons,
         course,
+        loading,
+        lessonCompleted,
         actualIndex,
         nextLesson,
         previouLesson,

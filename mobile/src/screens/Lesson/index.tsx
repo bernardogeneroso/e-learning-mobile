@@ -42,7 +42,13 @@ const Lesson = ({
   },
 }: LessonParams) => {
   const navigation = useNavigation();
-  const {nextLesson, previouLesson, lessons, actualIndex} = useLessons();
+  const {
+    nextLesson,
+    previouLesson,
+    lessons,
+    actualIndex,
+    lessonCompleted,
+  } = useLessons();
 
   const handleNavigateNextLesson = useCallback(() => {
     const NextLesson = nextLesson(lesson.id);
@@ -71,7 +77,7 @@ const Lesson = ({
       <Header courseDashboard course={course} />
 
       <ContainerLesson>
-        <ContainerVideo>
+        <ContainerVideo onPress={() => lessonCompleted(lesson.id)}>
           <Icon name="play-circle" size={54} color="#fff" />
         </ContainerVideo>
 

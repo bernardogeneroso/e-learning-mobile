@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   background-color: #fff;
+  height: 112px;
   border-radius: 16px;
   padding: 22px 20px 22px 65px;
   margin-left: 40px;
@@ -19,6 +20,7 @@ export const InfoLesson = styled.View`
   margin-top: 10px;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const GeralInfo = styled.View`

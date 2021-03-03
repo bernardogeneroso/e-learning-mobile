@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -31,9 +31,17 @@ const Header = ({course, courseDashboard = false}: HeaderProps) => {
     return course ? checkIfIsFavorite(course?.id) : false;
   });
 
+  useEffect(() => {
+    setHeartSelected(course ? checkIfIsFavorite(course?.id) : false);
+  }, [checkIfIsFavorite, course]);
+
   const handleToggleHeartSelected = useCallback(() => {
     setHeartSelected((state) => !state);
   }, []);
+
+  const handleNavigateToStartPage = useCallback(() => {
+    navigation.navigate('Start');
+  }, [navigation]);
 
   return (
     <Container classDashboard>
@@ -68,7 +76,7 @@ const Header = ({course, courseDashboard = false}: HeaderProps) => {
           <>
             <ImageLogo source={logo} width={120} />
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleNavigateToStartPage}>
               <IconFeather name="power" size={22} color="#FF6680" />
             </TouchableOpacity>
           </>
@@ -85,7 +93,7 @@ const Header = ({course, courseDashboard = false}: HeaderProps) => {
               placeholder="Pesquise um curso"
               placeholderTextColor="#C4C4D1"
               defaultValue={inputSearch}
-              onChangeText={(value) => {
+              onChangeText={(value: React.SetStateAction<string>) => {
                 setInputSearch(value);
               }}
             />

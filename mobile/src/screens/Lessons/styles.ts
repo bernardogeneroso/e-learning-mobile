@@ -32,3 +32,21 @@ export const LessonText = styled.Text`
   font-size: 15px;
   color: #a0a0b2;
 `;
+
+export const ContainerLoading = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ContainerNoResult = styled.View`
+  flex: 1;
+  align-items: center;
+  margin-top: 40px;
+`;
+
+export const NoResultText = styled.Text`
+  font-family: 'Roboto-Medium';
+  font-size: 18px;
+  color: #3d3d4c;
+`;

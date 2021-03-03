@@ -3,7 +3,7 @@ import {Animated, Dimensions, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {LessonsProps} from '..';
+import {LessonsProps} from '../../../hooks/LessonsManager';
 
 import {
   Container,
@@ -98,9 +98,11 @@ const LessonItem = ({y, index, lesson}: LeassonItemProps) => {
             </TimeLeassonView>
           </GeralInfo>
 
-          <LessonCompleted>
-            <LessonCompletedText>Completo!</LessonCompletedText>
-          </LessonCompleted>
+          {lesson.completed && (
+            <LessonCompleted>
+              <LessonCompletedText>Completo!</LessonCompletedText>
+            </LessonCompleted>
+          )}
         </InfoLesson>
 
         <ContainerVideoIcon>

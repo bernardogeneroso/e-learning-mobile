@@ -1,10 +1,10 @@
 import React, {useEffect, useMemo} from 'react';
-import {Animated} from 'react-native';
+import {Animated, ActivityIndicator} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 import Header from '../../components/Header';
 import {CoursesProps} from '../../hooks/CoursesManager';
-import {useLessons} from '../../hooks/LessonsManager';
+import {useLessons, LessonsProps} from '../../hooks/LessonsManager';
 import LessonItem from './LessonItem';
 
 import {
@@ -13,6 +13,9 @@ import {
   HeaderLessons,
   LessonTitle,
   LessonText,
+  ContainerLoading,
+  ContainerNoResult,
+  NoResultText,
 } from './styles';
 
 interface LessonsParams {
@@ -23,18 +26,6 @@ interface LessonsParams {
   };
 }
 
-export interface LessonsProps {
-  id: string;
-  name: string;
-  description: string;
-  minutes: number;
-  completed: number;
-  leasson_number: string;
-  courses_id: string;
-  created_at: string;
-  updated_at: string;
-}
-
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const Lessons = ({
@@ -42,7 +33,7 @@ const Lessons = ({
     params: {course},
   },
 }: LessonsParams) => {
-  const {lessons, selectCourse} = useLessons();
+  const {lessons, selectCourse, loading} = useLessons();
 
   const y = new Animated.Value(0);
   const onScroll = Animated.event([{nativeEvent: {contentOffset: {y}}}], {
@@ -72,22 +63,37 @@ const Lessons = ({
           <LessonText>{handleDisciplineCoursees}</LessonText>
         </HeaderLessons>
 
-        <AnimatedFlatList
-          data={lessons}
-          showsVerticalScrollIndicator={false}
-          scrollEventThrottle={16}
-          bounces={false}
-          keyExtractor={(classItem: LessonsProps) => classItem.id}
-          renderItem={({index, item: lesson}) => (
-            <LessonItem {...{index, y, lesson, course}} />
-          )}
-          style={{
-            marginTop: 4,
-          }}
-          {...{onScroll}}
-        />
+        {loading ? (
+          <ContainerLoading>
+            <ActivityIndicator size={46} animating color="#6548a3" />
+          </ContainerLoading>
+        ) : (
+          <AnimatedFlatList
+            data={lessons}
+            showsVerticalScrollIndicator={false}
+            scrollEventThrottle={16}
+            bounces={false}
+            keyExtractor={(classItem: LessonsProps) => classItem.id}
+            renderItem={({index, item: lesson}) => (
+              <LessonItem {...{index, y, lesson, course}} />
+            )}
+            ListEmptyComponent={lessonNoResult}
+            style={{
+              marginTop: 4,
+            }}
+            {...{onScroll}}
+          />
+        )}
       </ContainerLessons>
     </Container>
+  );
+};
+
+const lessonNoResult = () => {
+  return (
+    <ContainerNoResult>
+      <NoResultText>Sem resultados!</NoResultText>
+    </ContainerNoResult>
   );
 };
 

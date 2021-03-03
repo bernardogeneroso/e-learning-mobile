@@ -17,10 +17,12 @@ class LeassonController {
       const { course_id } = request.params;
 
       const leassons = await this.classRepository.findById(course_id);
+      const leasonsClassToClass = classToClass(leassons);
 
-      if (!leassons) throw new AppError("Error on get leassons", 400);
+      if (!leasonsClassToClass)
+        throw new AppError("Error on get leassons", 400);
 
-      const leassonsChanged = leassons.map((leasson, i) => {
+      const leassonsChanged = leasonsClassToClass.map((leasson, i) => {
         const count = i + 1;
 
         return {
@@ -29,7 +31,7 @@ class LeassonController {
         };
       });
 
-      return response.json(classToClass(leassonsChanged));
+      return response.json(leassonsChanged);
     } catch {
       throw new AppError("Error on get leassons", 400);
     }

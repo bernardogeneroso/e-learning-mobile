@@ -40,7 +40,7 @@ export default class Leasson {
   @UpdateDateColumn() updated_at!: Date;
 
   @Expose({ name: "completed" })
-  getImage_url(): number | boolean | null {
+  getComplete(): number | boolean | null {
     if (this.completed === null) {
       return null;
     }

@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {useWindowDimensions} from 'react-native';
+import {useWindowDimensions, ActivityIndicator} from 'react-native';
 
 import {CoursesProps, useCourses} from '../../hooks/CoursesManager';
 import Categorie from './Categorie';
@@ -14,13 +14,19 @@ import {
   CoursesList,
 } from './styles';
 
+import {
+  ContainerNoResult,
+  NoResultText,
+  ContainerLoading,
+} from '../../screens/Lessons/styles';
+
 interface DashBoardProps {
   courses?: CoursesProps[];
   saved?: boolean;
 }
 
 const DashBoard = ({courses, saved = false}: DashBoardProps) => {
-  const {modalVisible} = useCourses();
+  const {modalVisible, loading} = useCourses();
   const {width: dimensionWindow} = useWindowDimensions();
 
   const handleCoursesCourses = useMemo(() => {
@@ -43,23 +49,38 @@ const DashBoard = ({courses, saved = false}: DashBoardProps) => {
           <TextCountCourses>{handleCoursesCourses}</TextCountCourses>
         </HeaderMenu>
 
-        <CoursesList
-          data={courses}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(course: CoursesProps) => course.id}
-          renderItem={({item: course}: {item: CoursesProps}) => (
-            <Categorie
-              course={course}
-              dimensionWindow={dimensionWindow}
-              saved={saved}
-            />
-          )}
-          numColumns={2}
-        />
+        {loading ? (
+          <ContainerLoading>
+            <ActivityIndicator size={46} animating color="#6548a3" />
+          </ContainerLoading>
+        ) : (
+          <CoursesList
+            data={courses}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(course: CoursesProps) => course.id}
+            renderItem={({item: course}: {item: CoursesProps}) => (
+              <Categorie
+                course={course}
+                dimensionWindow={dimensionWindow}
+                saved={saved}
+              />
+            )}
+            ListEmptyComponent={coursesNoResult}
+            numColumns={2}
+          />
+        )}
       </ContainerMenu>
 
       <Modal modalVisible={modalVisible} />
     </Container>
+  );
+};
+
+const coursesNoResult = () => {
+  return (
+    <ContainerNoResult>
+      <NoResultText>Sem resultados!</NoResultText>
+    </ContainerNoResult>
   );
 };
 
