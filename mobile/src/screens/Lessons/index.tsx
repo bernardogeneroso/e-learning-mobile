@@ -44,13 +44,13 @@ const Lessons = ({
     selectCourse(course);
   }, [selectCourse, course]);
 
-  const handleDisciplineCoursees = useMemo(() => {
-    return course.lessons === 0
+  const handleQuantityLessons = useMemo(() => {
+    return lessons.length === 0
       ? 'Sem aulas'
-      : course.lessons === 1
-      ? `${course.lessons} aula`
-      : `${course.lessons} aulas`;
-  }, [course.lessons]);
+      : lessons.length === 1
+      ? `${lessons.length} aula`
+      : `${lessons.length} aulas`;
+  }, [lessons]);
 
   return (
     <Container>
@@ -60,7 +60,7 @@ const Lessons = ({
         <HeaderLessons>
           <LessonTitle>{course.name}</LessonTitle>
 
-          <LessonText>{handleDisciplineCoursees}</LessonText>
+          <LessonText>{handleQuantityLessons}</LessonText>
         </HeaderLessons>
 
         {loading ? (

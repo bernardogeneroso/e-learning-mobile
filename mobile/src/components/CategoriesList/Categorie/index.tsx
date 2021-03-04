@@ -8,8 +8,8 @@ import {ProfileScreenNavigationProp} from '../../../routes/app.routes';
 
 import {
   CoursesContent,
-  ImageDiscipline,
-  TitleDiscipline,
+  ImageCourse,
+  TitleCourse,
   TextClasses,
   RemoveContent,
 } from './styles';
@@ -74,14 +74,14 @@ const Categorie = ({
             params: {course},
           });
         }}>
-        <ImageDiscipline
+        <ImageCourse
           source={{uri: course.image_url}}
           style={{
             resizeMode: 'contain',
           }}
         />
-        <TitleDiscipline>{course.name}</TitleDiscipline>
-        <TextClasses>{course.lessons} Aulas</TextClasses>
+        <TitleCourse>{course.name}</TitleCourse>
+        <TextClasses> Aulas</TextClasses>
         {saved && (
           <RemoveContent>
             <Animated.View

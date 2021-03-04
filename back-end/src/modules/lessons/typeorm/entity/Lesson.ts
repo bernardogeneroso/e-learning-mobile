@@ -12,7 +12,7 @@ import { Expose, Exclude } from "class-transformer";
 import Course from "../../../courses/typeorm/entity/Course";
 
 @Entity("lessons")
-export default class Leasson {
+export default class Lesson {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 

@@ -29,13 +29,12 @@ class CourseController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, lessons } = request.body;
+    const { name } = request.body;
 
     try {
       const createCourse = await this.courseRepository.create({
         name,
         image: request.file.filename,
-        lessons,
       });
 
       return response.json(classToClass(createCourse));
@@ -56,7 +55,7 @@ class CourseController {
 
       const filePath = path.resolve(
         uploadConfig.uploadsFolder,
-        "lessons",
+        "courses",
         courseOnlyImage.image
       );
 

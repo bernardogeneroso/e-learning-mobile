@@ -13,9 +13,9 @@ lessonsRoutes.get(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LessonController();
+    const lessonRoutes = new LessonController();
 
-    leassonRoutes.index(req, resp);
+    lessonRoutes.index(req, resp);
   }
 );
 
@@ -30,9 +30,9 @@ lessonsRoutes.post(
     },
   }),
   async (req, resp) => {
-    const leassonRoutes = new LessonController();
+    const lessonRoutes = new LessonController();
 
-    leassonRoutes.create(req, resp);
+    lessonRoutes.create(req, resp);
   }
 );
 
@@ -44,9 +44,9 @@ lessonsRoutes.delete(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LessonController();
+    const lessonRoutes = new LessonController();
 
-    leassonRoutes.remove(req, resp);
+    lessonRoutes.remove(req, resp);
   }
 );
 
@@ -58,9 +58,9 @@ lessonsRoutes.put(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LessonController();
+    const lessonRoutes = new LessonController();
 
-    leassonRoutes.completed(req, resp);
+    lessonRoutes.completed(req, resp);
   }
 );
 

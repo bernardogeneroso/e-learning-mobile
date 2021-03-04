@@ -16,12 +16,12 @@ export const CoursesContent = styled.TouchableOpacity<CoursesContentProps>`
   z-index: -1;
 `;
 
-export const ImageDiscipline = styled.Image`
+export const ImageCourse = styled.Image`
   width: 64px;
   height: 64px;
 `;
 
-export const TitleDiscipline = styled.Text`
+export const TitleCourse = styled.Text`
   font-family: 'Rubik-Regular';
   color: #6c6c80;
   font-size: 15px;

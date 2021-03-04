@@ -21,9 +21,6 @@ export default class Course {
   @Column()
   image!: string;
 
-  @Column()
-  lessons!: number;
-
   @OneToMany(() => Lessons, (lessons) => lessons.course_id)
   lessonsLink!: Lessons;
 

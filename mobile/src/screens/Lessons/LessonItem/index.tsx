@@ -11,7 +11,7 @@ import {
   InfoLesson,
   GeralInfo,
   NumberOfLessonText,
-  TimeLeassonView,
+  TimeLessonView,
   TimeIcon,
   TimeText,
   LessonCompleted,
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
   },
 });
 
-interface LeassonItemProps {
+interface LessonItemProps {
   y: Animated.Value;
   index: number;
   lesson: LessonsProps;
 }
 
-const LessonItem = ({y, index, lesson}: LeassonItemProps) => {
+const LessonItem = ({y, index, lesson}: LessonItemProps) => {
   const navigation = useNavigation();
   const {course} = useLessons();
 
@@ -71,7 +71,7 @@ const LessonItem = ({y, index, lesson}: LeassonItemProps) => {
     outputRange: [0.5, 1, 1, 0.5],
   });
 
-  const handleNavigateToLeasson = useCallback(
+  const handleNavigateToLesson = useCallback(
     (lesson: LessonsProps) => {
       navigation.navigate('Lesson', {lesson, course});
     },
@@ -82,20 +82,18 @@ const LessonItem = ({y, index, lesson}: LeassonItemProps) => {
     <Animated.View
       key={index}
       style={[styles.card, {opacity, transform: [{translateY}, {scale}]}]}>
-      <Container onPress={() => handleNavigateToLeasson(lesson)}>
+      <Container onPress={() => handleNavigateToLesson(lesson)}>
         <TitleLesson>{lesson.name}</TitleLesson>
 
         <InfoLesson>
           <GeralInfo>
-            <NumberOfLessonText>
-              Aula {lesson.leasson_number}
-            </NumberOfLessonText>
-            <TimeLeassonView>
+            <NumberOfLessonText>Aula {lesson.lesson_number}</NumberOfLessonText>
+            <TimeLessonView>
               <TimeIcon>
                 <Icon name="clock" size={12} color="#C4C4D1" />
               </TimeIcon>
               <TimeText>{lesson.minutes} min</TimeText>
-            </TimeLeassonView>
+            </TimeLessonView>
           </GeralInfo>
 
           {lesson.completed && (

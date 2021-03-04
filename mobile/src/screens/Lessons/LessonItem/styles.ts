@@ -35,7 +35,7 @@ export const NumberOfLessonText = styled.Text`
   margin-right: 22px;
 `;
 
-export const TimeLeassonView = styled.View`
+export const TimeLessonView = styled.View`
   flex-direction: row;
   align-items: center;
 `;

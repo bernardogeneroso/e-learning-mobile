@@ -87,7 +87,7 @@ const Lesson = ({
 
             <InfoLesson>
               <NumberOfLessonText>
-                Aula {lesson.leasson_number}
+                Aula {lesson.lesson_number}
               </NumberOfLessonText>
 
               <TimeLessonView>

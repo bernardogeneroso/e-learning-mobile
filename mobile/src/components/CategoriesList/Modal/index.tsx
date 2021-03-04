@@ -24,9 +24,9 @@ const ModalRemoveOfFavourite = ({modalVisible}: modalVisibleProps) => {
   const {toggleModal, removeFavorite} = useCourses();
 
   const handleRemoveFavorite = useCallback(
-    (discipline?: CoursesProps) => {
-      if (discipline) {
-        removeFavorite(discipline);
+    (course?: CoursesProps) => {
+      if (course) {
+        removeFavorite(course);
         toggleModal();
       }
     },
@@ -53,7 +53,7 @@ const ModalRemoveOfFavourite = ({modalVisible}: modalVisibleProps) => {
           <Icon name="trash" size={48} color="#FF6680" />
 
           <TextInfo>
-            Quer excluir suas aulas de {modalVisible.discipline?.name}?
+            Quer excluir suas aulas de {modalVisible.course?.name}?
           </TextInfo>
 
           <ActionsButtons>
@@ -62,7 +62,7 @@ const ModalRemoveOfFavourite = ({modalVisible}: modalVisibleProps) => {
             </ButtonClose>
             <ButtonRemove>
               <ButtonRemoveText
-                onPress={() => handleRemoveFavorite(modalVisible.discipline)}>
+                onPress={() => handleRemoveFavorite(modalVisible.course)}>
                 Com certeza
               </ButtonRemoveText>
             </ButtonRemove>

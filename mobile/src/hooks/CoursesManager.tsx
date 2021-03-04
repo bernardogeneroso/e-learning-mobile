@@ -13,7 +13,6 @@ export interface CoursesProps {
   name: string;
   image: string;
   image_url: string;
-  lessons: number;
   created_at: string;
   updated_at: string;
 }
@@ -84,9 +83,9 @@ const CoursesProvider: React.FC = ({children}) => {
   );
 
   const removeFavorite = useCallback(
-    async (disciplineReceive: CoursesProps) => {
+    async (courseReceive: CoursesProps) => {
       const coursesFilter = coursesSaved.filter(
-        (discipline: CoursesProps) => discipline.id !== disciplineReceive.id,
+        (course: CoursesProps) => course.id !== courseReceive.id,
       );
 
       await AsyncStorage.setItem(

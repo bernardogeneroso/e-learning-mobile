@@ -9,7 +9,7 @@ export interface LessonsProps {
   description: string;
   minutes: number;
   completed: boolean;
-  leasson_number: string;
+  lesson_number: string;
   courses_id: string;
   created_at: string;
   updated_at: string;

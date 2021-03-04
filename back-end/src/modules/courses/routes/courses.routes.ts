@@ -22,7 +22,6 @@ coursesRoutes.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      lessons: Joi.string().required(),
     },
   }),
   async (req, resp) => {
