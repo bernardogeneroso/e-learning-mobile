@@ -38,7 +38,7 @@ const LessonsProvider = ({children}: any) => {
   useEffect(() => {
     if (course) {
       setLoading(true);
-      api.get(`/leassons/${course.id}`).then(({data}) => {
+      api.get(`/lessons/${course.id}`).then(({data}) => {
         setLessons(data);
         setLoading(false);
       });
@@ -50,7 +50,7 @@ const LessonsProvider = ({children}: any) => {
   };
 
   const lessonCompleted = async (id: string) => {
-    await api.put(`/leassons/${id}`);
+    await api.put(`/lessons/${id}`);
 
     setLessons((state) => {
       const updateState = state.map((lessonNow) => {

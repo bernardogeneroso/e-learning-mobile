@@ -1,12 +1,11 @@
 import express from "express";
 import { celebrate, Segments, Joi } from "celebrate";
 
-import LeassonController from "../controllers/LeassonController";
-import AppError from "../../../shared/errors/AppError";
+import LessonController from "../controllers/LessonController";
 
-const leassonsRoutes = express.Router();
+const lessonsRoutes = express.Router();
 
-leassonsRoutes.get(
+lessonsRoutes.get(
   "/:course_id",
   celebrate({
     [Segments.PARAMS]: {
@@ -14,13 +13,13 @@ leassonsRoutes.get(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LeassonController();
+    const leassonRoutes = new LessonController();
 
     leassonRoutes.index(req, resp);
   }
 );
 
-leassonsRoutes.post(
+lessonsRoutes.post(
   "/",
   celebrate({
     [Segments.BODY]: {
@@ -31,13 +30,13 @@ leassonsRoutes.post(
     },
   }),
   async (req, resp) => {
-    const leassonRoutes = new LeassonController();
+    const leassonRoutes = new LessonController();
 
     leassonRoutes.create(req, resp);
   }
 );
 
-leassonsRoutes.delete(
+lessonsRoutes.delete(
   "/:id",
   celebrate({
     [Segments.PARAMS]: {
@@ -45,13 +44,13 @@ leassonsRoutes.delete(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LeassonController();
+    const leassonRoutes = new LessonController();
 
     leassonRoutes.remove(req, resp);
   }
 );
 
-leassonsRoutes.put(
+lessonsRoutes.put(
   "/:id",
   celebrate({
     [Segments.PARAMS]: {
@@ -59,10 +58,10 @@ leassonsRoutes.put(
     },
   }),
   (req, resp) => {
-    const leassonRoutes = new LeassonController();
+    const leassonRoutes = new LessonController();
 
     leassonRoutes.completed(req, resp);
   }
 );
 
-export default leassonsRoutes;
+export default lessonsRoutes;

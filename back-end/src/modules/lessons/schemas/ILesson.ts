@@ -1,4 +1,4 @@
-export default interface ILeasson {
+export default interface ILesson {
   name: string;
   description: string;
   minutes: number;

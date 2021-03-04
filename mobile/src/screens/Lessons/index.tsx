@@ -45,12 +45,12 @@ const Lessons = ({
   }, [selectCourse, course]);
 
   const handleDisciplineCoursees = useMemo(() => {
-    return course.leassons === 0
+    return course.lessons === 0
       ? 'Sem aulas'
-      : course.leassons === 1
-      ? `${course.leassons} aula`
-      : `${course.leassons} aulas`;
-  }, [course.leassons]);
+      : course.lessons === 1
+      ? `${course.lessons} aula`
+      : `${course.lessons} aulas`;
+  }, [course.lessons]);
 
   return (
     <Container>

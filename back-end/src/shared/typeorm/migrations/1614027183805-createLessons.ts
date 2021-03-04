@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from "typeorm";
 
-export class createLeassons1614027183805 implements MigrationInterface {
+export class createLessons1614027183805 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "leassons",
+        name: "lessons",
         columns: [
           {
             name: "id",
@@ -27,7 +27,7 @@ export class createLeassons1614027183805 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "leasson_name",
+            name: "lesson_name",
             type: "varchar",
           },
           {
@@ -57,9 +57,9 @@ export class createLeassons1614027183805 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "leassons",
+      "lessons",
       new TableForeignKey({
-        name: "LeassonsCourses",
+        name: "LessonsCourses",
         columnNames: ["course_id"],
         referencedColumnNames: ["id"],
         referencedTableName: "courses",
@@ -70,6 +70,6 @@ export class createLeassons1614027183805 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("leassons");
+    await queryRunner.dropTable("lessons");
   }
 }

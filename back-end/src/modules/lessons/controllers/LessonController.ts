@@ -2,38 +2,37 @@ import { Request, Response } from "express";
 import { classToClass } from "class-transformer";
 
 import AppError from "../../../shared/errors/AppError";
-import LeassonRepository from "../typeorm/repositories/LeassonRepository";
-import ILeassonsRepository from "../repositories/ILeassonsRepository";
+import LessonRepository from "../typeorm/repositories/LessonRepository";
+import ILessonsRepository from "../repositories/ILessonsRepository";
 
-class LeassonController {
-  private classRepository: ILeassonsRepository;
+class LessonController {
+  private classRepository: ILessonsRepository;
 
   constructor() {
-    this.classRepository = new LeassonRepository();
+    this.classRepository = new LessonRepository();
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
     try {
       const { course_id } = request.params;
 
-      const leassons = await this.classRepository.findById(course_id);
-      const leasonsClassToClass = classToClass(leassons);
+      const lessons = await this.classRepository.findById(course_id);
+      const lesonsClassToClass = classToClass(lessons);
 
-      if (!leasonsClassToClass)
-        throw new AppError("Error on get leassons", 400);
+      if (!lesonsClassToClass) throw new AppError("Error on get lessons", 400);
 
-      const leassonsChanged = leasonsClassToClass.map((leasson, i) => {
+      const lessonsChanged = lesonsClassToClass.map((lesson, i) => {
         const count = i + 1;
 
         return {
-          ...leasson,
-          leasson_number: count < 10 ? "0" + count : count.toString(),
+          ...lesson,
+          lesson_number: count < 10 ? "0" + count : count.toString(),
         };
       });
 
-      return response.json(leassonsChanged);
+      return response.json(lessonsChanged);
     } catch {
-      throw new AppError("Error on get leassons", 400);
+      throw new AppError("Error on get lessons", 400);
     }
   }
 
@@ -41,7 +40,7 @@ class LeassonController {
     try {
       const { name, description, minutes, course_id } = request.body;
 
-      const createLeasson = await this.classRepository.create({
+      const createLesson = await this.classRepository.create({
         name,
         description,
         minutes,
@@ -49,9 +48,9 @@ class LeassonController {
         course_id,
       });
 
-      return response.json(classToClass(createLeasson));
+      return response.json(classToClass(createLesson));
     } catch {
-      throw new AppError("Error on create leasson", 400);
+      throw new AppError("Error on create lesson", 400);
     }
   }
 
@@ -63,7 +62,7 @@ class LeassonController {
 
       return response.send();
     } catch {
-      throw new AppError("Error on delete leasson", 400);
+      throw new AppError("Error on delete lesson", 400);
     }
   }
 
@@ -78,9 +77,9 @@ class LeassonController {
 
       return response.send();
     } catch {
-      throw new AppError("Error on change leasson to completed", 400);
+      throw new AppError("Error on change lesson to completed", 400);
     }
   }
 }
 
-export default LeassonController;
+export default LessonController;

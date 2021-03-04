@@ -1,18 +1,18 @@
 import { getRepository, Repository } from "typeorm";
 
-import ILeassonsRepository from "../../repositories/ILeassonsRepository";
-import Leasson from "../entity/Leasson";
-import ILeasson from "../../schemas/ILeasson";
+import ILessonsRepository from "../../repositories/ILessonsRepository";
+import Lesson from "../entity/Lesson";
+import ILesson from "../../schemas/ILesson";
 import AppError from "../../../../shared/errors/AppError";
 
-class LeassonRepository implements ILeassonsRepository {
-  private ormRepository: Repository<Leasson>;
+class LessonRepository implements ILessonsRepository {
+  private ormRepository: Repository<Lesson>;
 
   constructor() {
-    this.ormRepository = getRepository(Leasson);
+    this.ormRepository = getRepository(Lesson);
   }
 
-  public async findById(course_id: string): Promise<Leasson[] | undefined> {
+  public async findById(course_id: string): Promise<Lesson[] | undefined> {
     try {
       return this.ormRepository.find({
         cache: true,
@@ -22,11 +22,11 @@ class LeassonRepository implements ILeassonsRepository {
         },
       });
     } catch {
-      throw new AppError("Error on get leassons");
+      throw new AppError("Error on get lessons");
     }
   }
 
-  public async create(data: ILeasson): Promise<Leasson> {
+  public async create(data: ILesson): Promise<Lesson> {
     try {
       const classCreate = this.ormRepository.create(data);
 
@@ -36,7 +36,7 @@ class LeassonRepository implements ILeassonsRepository {
 
       return classCreate;
     } catch (error) {
-      throw new AppError("Error on create leasson");
+      throw new AppError("Error on create lesson");
     }
   }
 
@@ -46,7 +46,7 @@ class LeassonRepository implements ILeassonsRepository {
 
       return;
     } catch {
-      throw new AppError("Error on delete leasson");
+      throw new AppError("Error on delete lesson");
     }
   }
 
@@ -54,7 +54,7 @@ class LeassonRepository implements ILeassonsRepository {
     try {
       await this.ormRepository
         .createQueryBuilder()
-        .update(Leasson)
+        .update(Lesson)
         .set({
           completed: 1,
         })
@@ -63,9 +63,9 @@ class LeassonRepository implements ILeassonsRepository {
 
       return;
     } catch {
-      throw new AppError("Error on change leasson to completed");
+      throw new AppError("Error on change lesson to completed");
     }
   }
 }
 
-export default LeassonRepository;
+export default LessonRepository;

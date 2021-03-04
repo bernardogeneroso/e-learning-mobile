@@ -81,7 +81,7 @@ const Categorie = ({
           }}
         />
         <TitleDiscipline>{course.name}</TitleDiscipline>
-        <TextClasses>{course.leassons} Aulas</TextClasses>
+        <TextClasses>{course.lessons} Aulas</TextClasses>
         {saved && (
           <RemoveContent>
             <Animated.View

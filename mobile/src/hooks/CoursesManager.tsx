@@ -13,7 +13,7 @@ export interface CoursesProps {
   name: string;
   image: string;
   image_url: string;
-  leassons: number;
+  lessons: number;
   created_at: string;
   updated_at: string;
 }

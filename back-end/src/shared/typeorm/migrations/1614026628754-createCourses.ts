@@ -23,7 +23,7 @@ export class createCourses1614026628754 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "leassons",
+            name: "lessons",
             type: "int",
           },
           {

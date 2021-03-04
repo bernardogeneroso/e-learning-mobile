@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { Expose } from "class-transformer";
 
-import Leasson from "../../../leassons/typeorm/entity/Leasson";
+import Lessons from "../../../lessons/typeorm/entity/Lesson";
 
 @Entity("courses")
 export default class Course {
@@ -22,10 +22,10 @@ export default class Course {
   image!: string;
 
   @Column()
-  leassons!: number;
+  lessons!: number;
 
-  @OneToMany(() => Leasson, (leassons) => leassons.course_id)
-  leassonsLink!: Leasson;
+  @OneToMany(() => Lessons, (lessons) => lessons.course_id)
+  lessonsLink!: Lessons;
 
   @CreateDateColumn() created_at!: Date;
 
